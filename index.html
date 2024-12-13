@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Mario Scralaxy</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    #game-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background-color: #000;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    #version-selector {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+      transition: right 0.3s ease;
+      overflow-y: auto;
+    }
+
+    #version-selector.open {
+      right: 0;
+    }
+
+    .version {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .version:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .version img {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+      border-radius: 5px;
+    }
+
+    .version-name {
+      font-size: 18px;
+    }
+
+    #toggle-button {
+      position: fixed;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+
+    #toggle-button:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <iframe id="game-frame" src="index.html"></iframe>
+  </div>
+
+  <div id="version-selector">
+    <div class="version" onclick="loadGame('index.html')">
+      <img src="path/to/modern-thumbnail.jpg" alt="Modern">
+      <div class="version-name">Modern</div>
+    </div>
+    <div class="version" onclick="loadGame('version/index.html')">
+      <img src="path/to/space-thumbnail.jpg" alt="Space">
+      <div class="version-name">Space</div>
+    </div>
+  </div>
+
+  <div id="toggle-button" onclick="toggleVersionSelector()">
+    →
+  </div>
+
+  <script>
+    function toggleVersionSelector() {
+      const selector = document.getElementById('version-selector');
+      const button = document.getElementById('toggle-button');
+
+      if (selector.classList.contains('open')) {
+        selector.classList.remove('open');
+        button.innerHTML = '→'; // Right arrow
+      } else {
+        selector.classList.add('open');
+        button.innerHTML = '←'; // Left arrow
+      }
+    }
+
+    function loadGame(url) {
+      const iframe = document.getElementById('game-frame');
+      iframe.src = url;
+    }
+  </script>
+</body>
+</html>
